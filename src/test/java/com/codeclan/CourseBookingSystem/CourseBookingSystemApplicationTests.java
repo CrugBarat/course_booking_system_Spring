@@ -83,4 +83,17 @@ class CourseBookingSystemApplicationTests {
 		assertEquals(1, found.size());
 	}
 
+	@Test
+	public void canFindCustomerByTownAndOverACertainAgeAndByCourseName__WithCustomer(){
+		List<Customer> found = customerRepository.findAllByTownAndAgeGreaterThanAndBookingsCourseName("Edinburgh", 34,  "Python for Data Analysis");
+		assertEquals(2L, found.get(0).getId().longValue());
+		assertEquals(1, found.size());
+	}
+
+	@Test
+	public void canFindCustomerByTownAndOverACertainAgeAndByCourseName__WithOutCustomer(){
+		List<Customer> found = customerRepository.findAllByTownAndAgeGreaterThanAndBookingsCourseName("Edinburgh", 36,  "Python for Data Analysis");
+		assertEquals(0, found.size());
+	}
+
 }
