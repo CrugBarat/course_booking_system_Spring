@@ -76,4 +76,11 @@ class CourseBookingSystemApplicationTests {
 		assertEquals(1, found.size());
 	}
 
+	@Test
+	public void canFindCustomerByTownAndCourseName(){
+		List<Customer> found = customerRepository.findByTownAndBookingsCourseName("Highlands", "Data Analysis");
+		assertEquals(3L, found.get(0).getId().longValue());
+		assertEquals(1, found.size());
+	}
+
 }
