@@ -48,4 +48,11 @@ class CourseBookingSystemApplicationTests {
 		assertEquals(6, found.size());
 	}
 
+	@Test
+	public void canFindCourseBYRating(){
+		List<Course> found = courseRepository.findByRating(5);
+		assertEquals(1L, found.get(0).getId().longValue());
+		assertEquals(2, found.size());
+	}
+
 }
