@@ -13,7 +13,7 @@ public class CourseController {
 
     @GetMapping(value = "/courses")
     public ResponseEntity getCourses(){
-        return new ResponseEntity<>(courseRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity(courseRepository.findAll(), HttpStatus.OK);
     }
 
 }
