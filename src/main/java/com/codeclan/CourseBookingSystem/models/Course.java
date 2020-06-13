@@ -1,7 +1,6 @@
 package com.codeclan.CourseBookingSystem.models;
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "courses")
 public class Course {
@@ -10,10 +9,10 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column
     private String name;
 
-    @Column(name = "town")
+    @Column
     private String town;
 
     @Column(name = "star_rating")

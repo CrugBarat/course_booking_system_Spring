@@ -9,7 +9,7 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "date")
+    @Column
     private String date;
 
     public Booking(String date) {
