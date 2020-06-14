@@ -15,10 +15,14 @@ public class BookingController {
 
     @GetMapping(value = "/bookings")
     public ResponseEntity getBookings(
-            @RequestParam(name ="date") String date
+            @RequestParam(name ="date", required = false) String date,
+            @RequestParam(name ="courseName", required = false) String courseName
     ){
         if(date != null) {
             return new ResponseEntity(bookingRepository.findByDate(date), HttpStatus.OK);
+        }
+        if(courseName != null) {
+            return new ResponseEntity(bookingRepository.findByCourseNameIgnoreCase(courseName), HttpStatus.OK);
         }
         return new ResponseEntity(bookingRepository.findAll(), HttpStatus.OK);
     }
