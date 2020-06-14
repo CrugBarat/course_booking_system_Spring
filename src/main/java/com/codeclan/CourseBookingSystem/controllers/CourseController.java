@@ -14,13 +14,17 @@ public class CourseController {
     @GetMapping(value = "/courses")
     public ResponseEntity getCourses(
             @RequestParam(name = "rating", required = false) Integer rating,
-            @RequestParam(name = "customerName", required = false) String customerName
+            @RequestParam(name = "customerName", required = false) String customerName,
+            @RequestParam(name = "name", required = false) String name
     ){
         if(rating != null){
             return new ResponseEntity(courseRepository.findByRating(rating), HttpStatus.OK);
         }
         if(customerName != null){
-            return new ResponseEntity(courseRepository. findByBookingsCustomerNameIgnoreCase(customerName), HttpStatus.OK);
+            return new ResponseEntity(courseRepository.findByBookingsCustomerNameIgnoreCase(customerName), HttpStatus.OK);
+        }
+        if(name != null){
+            return new ResponseEntity(courseRepository.findByNameIgnoreCase(name), HttpStatus.OK);
         }
         return new ResponseEntity(courseRepository.findAll(), HttpStatus.OK);
     }

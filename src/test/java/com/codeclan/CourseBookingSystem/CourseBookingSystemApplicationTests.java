@@ -180,4 +180,18 @@ class CourseBookingSystemApplicationTests {
 		assertEquals(1, found.size());
 	}
 
+	@Test
+	public void canFindCourseByName__CorrectCase() {
+		List<Course> found = courseRepository.findByNameIgnoreCase("Python for Data Analysis");
+		assertEquals(6L, found.get(0).getId().longValue());
+		assertEquals(1, found.size());
+	}
+
+	@Test
+	public void canFindCourseByNamee__LowerCase() {
+		List<Course> found = courseRepository.findByNameIgnoreCase("python for data analysis");
+		assertEquals(6L, found.get(0).getId().longValue());
+		assertEquals(1, found.size());
+	}
+
 }
