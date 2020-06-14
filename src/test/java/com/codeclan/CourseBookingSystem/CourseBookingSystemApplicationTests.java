@@ -106,21 +106,21 @@ class CourseBookingSystemApplicationTests {
 
 	@Test
 	public void canFindCustomerByTownAndOverACertainAgeAndByCourseName__WithCustomerCorrectCase(){
-		List<Customer> found = customerRepository.findAllByTownIgnoreCaseAndAgeGreaterThanAndBookingsCourseNameIgnoreCase("Edinburgh", 34,  "Python for Data Analysis");
+		List<Customer> found = customerRepository.findByTownIgnoreCaseAndAgeGreaterThanAndBookingsCourseNameIgnoreCase("Edinburgh", 34,  "Python for Data Analysis");
 		assertEquals(2L, found.get(0).getId().longValue());
 		assertEquals(1, found.size());
 	}
 
 	@Test
 	public void canFindCustomerByTownAndOverACertainAgeAndByCourseName__WithCustomerLowerCase(){
-		List<Customer> found = customerRepository.findAllByTownIgnoreCaseAndAgeGreaterThanAndBookingsCourseNameIgnoreCase("edinburgh", 34,  "python for data analysis");
+		List<Customer> found = customerRepository.findByTownIgnoreCaseAndAgeGreaterThanAndBookingsCourseNameIgnoreCase("edinburgh", 34,  "python for data analysis");
 		assertEquals(2L, found.get(0).getId().longValue());
 		assertEquals(1, found.size());
 	}
 
 	@Test
 	public void canFindCustomerByTownAndOverACertainAgeAndByCourseName__WithOutCustomer(){
-		List<Customer> found = customerRepository.findAllByTownIgnoreCaseAndAgeGreaterThanAndBookingsCourseNameIgnoreCase("Edinburgh", 36,  "Python for Data Analysis");
+		List<Customer> found = customerRepository.findByTownIgnoreCaseAndAgeGreaterThanAndBookingsCourseNameIgnoreCase("Edinburgh", 36,  "Python for Data Analysis");
 		assertEquals(0, found.size());
 	}
 
@@ -206,6 +206,20 @@ class CourseBookingSystemApplicationTests {
 		List<Course> found = courseRepository.findByTownIgnoreCase("highlands");
 		assertEquals(3L, found.get(0).getId().longValue());
 		assertEquals(2, found.size());
+	}
+
+	@Test
+	public void canFindCustomerByName__CorrectCase() {
+		List<Customer> found = customerRepository.findByNameIgnoreCase("Jane Doe");
+		assertEquals(1L, found.get(0).getId().longValue());
+		assertEquals(1, found.size());
+	}
+
+	@Test
+	public void canFindCustomerByName__LowerCase() {
+		List<Customer> found = customerRepository.findByNameIgnoreCase("jane doe");
+		assertEquals(1L, found.get(0).getId().longValue());
+		assertEquals(1, found.size());
 	}
 
 }

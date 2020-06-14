@@ -17,16 +17,20 @@ public class CustomerController {
     public ResponseEntity getCustomers(
             @RequestParam(name = "courseName", required = false) String courseName,
             @RequestParam(name = "town", required = false) String town,
-            @RequestParam(name = "age", required = false) Integer age
+            @RequestParam(name = "age", required = false) Integer age,
+            @RequestParam(name = "name", required = false) String name
     ){
         if(courseName != null && town != null && age != null) {
-            return new ResponseEntity(customerRepository.findAllByTownIgnoreCaseAndAgeGreaterThanAndBookingsCourseNameIgnoreCase(town, age, courseName), HttpStatus.OK);
+            return new ResponseEntity(customerRepository.findByTownIgnoreCaseAndAgeGreaterThanAndBookingsCourseNameIgnoreCase(town, age, courseName), HttpStatus.OK);
         }
         if(courseName != null && town != null) {
             return new ResponseEntity(customerRepository.findByTownIgnoreCaseAndBookingsCourseNameIgnoreCase(town, courseName), HttpStatus.OK);
         }
         if(courseName != null) {
-            return new ResponseEntity(customerRepository. findByBookingsCourseNameIgnoreCase(courseName), HttpStatus.OK);
+            return new ResponseEntity(customerRepository.findByBookingsCourseNameIgnoreCase(courseName), HttpStatus.OK);
+        }
+        if(name != null) {
+            return new ResponseEntity(customerRepository.findByNameIgnoreCase(name), HttpStatus.OK);
         }
         return new ResponseEntity(customerRepository.findAll(), HttpStatus.OK);
     }
