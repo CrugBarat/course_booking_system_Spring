@@ -32,6 +32,9 @@ public class CustomerController {
         if(name != null) {
             return new ResponseEntity(customerRepository.findByNameIgnoreCase(name), HttpStatus.OK);
         }
+        if(town != null) {
+            return new ResponseEntity(customerRepository.findByTownIgnoreCase(town), HttpStatus.OK);
+        }
         return new ResponseEntity(customerRepository.findAll(), HttpStatus.OK);
     }
 
