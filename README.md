@@ -12,15 +12,15 @@ The API should be built from scratch with Spring using Spring Boot Initialiser.
 
 The course booking API needs to be built with three models with the following properties:
 
-**Course:**
+Course:
 - name
 - town
 - rating
 
-**Booking:**
+Booking:
 - date
 
-**Customer:**
+Customer:
 - name
 - town
 - age
@@ -31,10 +31,7 @@ The relationships should be:
 - A Customer has many bookings
 - A booking has a customer
 
-**Queries + Custom Routes**
-
-Write queries using the derived method we’ve shown. Connect these to suitable RESTful endpoints.
-
+Write queries using the derived method we’ve shown. Connect these to suitable RESTful endpoints:
 - Get all courses with a given rating
 - Get all customers for a given course
 - Get all courses for a given customer
