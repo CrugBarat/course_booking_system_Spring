@@ -1,5 +1,6 @@
 package com.codeclan.CourseBookingSystem.controllers;
 import com.codeclan.CourseBookingSystem.models.Course;
+import com.codeclan.CourseBookingSystem.models.Customer;
 import com.codeclan.CourseBookingSystem.repositories.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,9 +41,16 @@ public class CourseController {
     }
 
     @PostMapping(value = "/courses")
-    public ResponseEntity postCourse(@RequestBody Course course){
+    public ResponseEntity createCourse(@RequestBody Course course){
         courseRepository.save(course);
         return new ResponseEntity(course, HttpStatus.CREATED);
+    }
+
+    @PutMapping(value="/courses/{id}")
+    public ResponseEntity updateCourse(@PathVariable(value = "id") Long id, @RequestBody Course course) {
+        course.setId(id);
+        courseRepository.save(course);
+        return new ResponseEntity(course, HttpStatus.OK);
     }
 
 }

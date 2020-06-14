@@ -1,4 +1,5 @@
 package com.codeclan.CourseBookingSystem.controllers;
+import com.codeclan.CourseBookingSystem.models.Booking;
 import com.codeclan.CourseBookingSystem.models.Course;
 import com.codeclan.CourseBookingSystem.models.Customer;
 import com.codeclan.CourseBookingSystem.repositories.CustomerRepository;
@@ -44,9 +45,16 @@ public class CustomerController {
     }
 
     @PostMapping(value = "/customers")
-    public ResponseEntity postCourse(@RequestBody Customer customer){
+    public ResponseEntity createCustomer(@RequestBody Customer customer){
         customerRepository.save(customer);
         return new ResponseEntity(customer, HttpStatus.CREATED);
+    }
+
+    @PutMapping(value="/customers/{id}")
+    public ResponseEntity updateCustomer(@PathVariable(value = "id") Long id, @RequestBody Customer customer) {
+        customer.setId(id);
+        customerRepository.save(customer);
+        return new ResponseEntity(customer, HttpStatus.OK);
     }
 
 }

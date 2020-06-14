@@ -1,5 +1,6 @@
 package com.codeclan.CourseBookingSystem.controllers;
 import com.codeclan.CourseBookingSystem.models.Booking;
+import com.codeclan.CourseBookingSystem.models.Course;
 import com.codeclan.CourseBookingSystem.models.Customer;
 import com.codeclan.CourseBookingSystem.repositories.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,14 +39,21 @@ public class BookingController {
     }
 
     @GetMapping(value="/bookings/{id}")
-    public ResponseEntity getCourse(@PathVariable Long id) {
+    public ResponseEntity getBooking(@PathVariable Long id) {
         return new ResponseEntity(bookingRepository.findById(id), HttpStatus.OK);
     }
 
     @PostMapping(value = "/bookings")
-    public ResponseEntity postCourse(@RequestBody Booking booking){
+    public ResponseEntity createBooking(@RequestBody Booking booking){
         bookingRepository.save(booking);
         return new ResponseEntity(booking, HttpStatus.CREATED);
+    }
+
+    @PutMapping(value="/bookings/{id}")
+    public ResponseEntity updateBooking(@PathVariable(value = "id") Long id, @RequestBody Booking booking){
+        booking.setId(id);
+        bookingRepository.save(booking);
+        return new ResponseEntity(booking, HttpStatus.OK);
     }
 
 }
