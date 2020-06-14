@@ -12,18 +12,11 @@ The API should be built from scratch with Spring using Spring Boot Initialiser.
 
 The course booking API needs to be built with three models with the following properties:
 
-Course:
-- name
-- town
-- rating
+Course: name, town & rating
 
-Booking:
-- date
+Booking: date
 
-Customer:
-- name
-- town
-- age
+Customer: name, town, age
 
 The relationships should be:
 - A Course has many Bookings
