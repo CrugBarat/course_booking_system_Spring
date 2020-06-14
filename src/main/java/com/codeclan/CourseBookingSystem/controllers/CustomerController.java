@@ -45,7 +45,7 @@ public class CustomerController {
     }
 
     @PostMapping(value = "/customers")
-    public ResponseEntity createCustomer(@RequestBody Customer customer){
+    public ResponseEntity createCustomer(@RequestBody Customer customer) {
         customerRepository.save(customer);
         return new ResponseEntity(customer, HttpStatus.CREATED);
     }
@@ -55,6 +55,12 @@ public class CustomerController {
         customer.setId(id);
         customerRepository.save(customer);
         return new ResponseEntity(customer, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value="/customers/{id}")
+    public ResponseEntity deleteCustomer(@PathVariable Long id) {
+        customerRepository.deleteById(id);
+        return new ResponseEntity(id, HttpStatus.OK);
     }
 
 }

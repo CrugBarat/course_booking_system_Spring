@@ -23,7 +23,7 @@ public class Customer {
     private int age;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Booking> bookings;
 
     public Customer(String name, String town, int age) {

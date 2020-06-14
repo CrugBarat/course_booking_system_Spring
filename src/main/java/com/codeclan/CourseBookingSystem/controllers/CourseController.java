@@ -20,16 +20,16 @@ public class CourseController {
             @RequestParam(name = "name", required = false) String name,
             @RequestParam(name = "town", required = false) String town
     ){
-        if(rating != null){
+        if(rating != null) {
             return new ResponseEntity(courseRepository.findByRating(rating), HttpStatus.OK);
         }
-        if(customerName != null){
+        if(customerName != null) {
             return new ResponseEntity(courseRepository.findByBookingsCustomerNameIgnoreCase(customerName), HttpStatus.OK);
         }
-        if(name != null){
+        if(name != null) {
             return new ResponseEntity(courseRepository.findByNameIgnoreCase(name), HttpStatus.OK);
         }
-        if(town != null){
+        if(town != null) {
             return new ResponseEntity(courseRepository.findByTownIgnoreCase(town), HttpStatus.OK);
         }
         return new ResponseEntity(courseRepository.findAll(), HttpStatus.OK);
@@ -41,7 +41,7 @@ public class CourseController {
     }
 
     @PostMapping(value = "/courses")
-    public ResponseEntity createCourse(@RequestBody Course course){
+    public ResponseEntity createCourse(@RequestBody Course course) {
         courseRepository.save(course);
         return new ResponseEntity(course, HttpStatus.CREATED);
     }
@@ -51,6 +51,12 @@ public class CourseController {
         course.setId(id);
         courseRepository.save(course);
         return new ResponseEntity(course, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value="/courses/{id}")
+    public ResponseEntity deleteCourse(@PathVariable Long id) {
+        courseRepository.deleteById(id);
+        return new ResponseEntity(id, HttpStatus.OK);
     }
 
 }

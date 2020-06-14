@@ -23,7 +23,7 @@ public class Course {
     private int rating;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Booking> bookings;
 
     public Course(String name, String town, int rating) {
