@@ -19,6 +19,9 @@ public class BookingController {
             @RequestParam(name ="courseName", required = false) String courseName,
             @RequestParam(name ="customerName", required = false) String customerName
     ){
+        if(customerName != null && courseName != null) {
+            return new ResponseEntity(bookingRepository.findByCustomerNameIgnoreCaseAndCourseNameIgnoreCase(customerName, courseName), HttpStatus.OK);
+        }
         if(date != null) {
             return new ResponseEntity(bookingRepository.findByDate(date), HttpStatus.OK);
         }

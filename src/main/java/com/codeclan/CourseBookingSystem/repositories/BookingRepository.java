@@ -9,4 +9,5 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     List<Booking> findByDate(String date);
     List<Booking> findByCourseNameIgnoreCase(String courseName);
     List<Booking> findByCustomerNameIgnoreCase(String customerName);
+    List<Booking> findByCustomerNameIgnoreCaseAndCourseNameIgnoreCase(String customerName, String courseName);
 }
