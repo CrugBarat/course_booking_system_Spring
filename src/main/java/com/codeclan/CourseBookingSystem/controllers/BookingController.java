@@ -16,13 +16,17 @@ public class BookingController {
     @GetMapping(value = "/bookings")
     public ResponseEntity getBookings(
             @RequestParam(name ="date", required = false) String date,
-            @RequestParam(name ="courseName", required = false) String courseName
+            @RequestParam(name ="courseName", required = false) String courseName,
+            @RequestParam(name ="customerName", required = false) String customerName
     ){
         if(date != null) {
             return new ResponseEntity(bookingRepository.findByDate(date), HttpStatus.OK);
         }
         if(courseName != null) {
             return new ResponseEntity(bookingRepository.findByCourseNameIgnoreCase(courseName), HttpStatus.OK);
+        }
+        if(customerName != null) {
+            return new ResponseEntity(bookingRepository.findByCustomerNameIgnoreCase(customerName), HttpStatus.OK);
         }
         return new ResponseEntity(bookingRepository.findAll(), HttpStatus.OK);
     }

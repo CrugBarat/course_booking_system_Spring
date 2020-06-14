@@ -138,4 +138,18 @@ class CourseBookingSystemApplicationTests {
 		assertEquals(1, found.size());
 	}
 
+	@Test
+	public void canFindBookingsByCustomerName__CorrectCase() {
+		List<Booking> found = bookingRepository.findByCustomerNameIgnoreCase("Susan Dickson");
+		assertEquals(3L, found.get(0).getId().longValue());
+		assertEquals(2, found.size());
+	}
+
+	@Test
+	public void canFindBookingsByCustomerName__LowerCase() {
+		List<Booking> found = bookingRepository.findByCustomerNameIgnoreCase("susan dickson");
+		assertEquals(3L, found.get(0).getId().longValue());
+		assertEquals(2, found.size());
+	}
+
 }
