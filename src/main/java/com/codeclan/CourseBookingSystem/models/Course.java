@@ -28,7 +28,7 @@ public class Course {
 
     public Course(String name, String town, int rating) {
         this.name = name;
-        this.town = town.toLowerCase();
+        this.town = town;
         this.rating = rating;
         this.bookings = new ArrayList<Booking>();
     }

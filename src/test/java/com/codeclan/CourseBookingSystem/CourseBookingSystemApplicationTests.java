@@ -56,16 +56,30 @@ class CourseBookingSystemApplicationTests {
 	}
 
 	@Test
-	public void canFindCustomerByCourseName(){
-		List<Customer> found = customerRepository.findByBookingsCourseName("Web Development");
+	public void canFindCustomerByCourseName__CorrectCase(){
+		List<Customer> found = customerRepository.findByBookingsCourseNameIgnoreCase("Web Development");
 		assertEquals(1L, found.get(0).getId().longValue());
 		assertEquals(1, found.size());
 	}
 
 	@Test
-	public void canFindCoursesByCustomerName(){
-		List<Course> found = courseRepository.findByBookingsCustomerName("John Smith");
-		assertEquals(3L, found.get(0).getId().longValue());
+	public void canFindCustomerByCourseName__LowerCase(){
+		List<Customer> found = customerRepository.findByBookingsCourseNameIgnoreCase("web development");
+		assertEquals(1L, found.get(0).getId().longValue());
+		assertEquals(1, found.size());
+	}
+
+	@Test
+	public void canFindCoursesByCustomerName__CorrectCase(){
+		List<Course> found = courseRepository. findByBookingsCustomerNameIgnoreCase("John Smith");
+		assertEquals(5L, found.get(0).getId().longValue());
+		assertEquals(2, found.size());
+	}
+
+	@Test
+	public void canFindCoursesByCustomerName__LowerCase(){
+		List<Course> found = courseRepository. findByBookingsCustomerNameIgnoreCase("john smith");
+		assertEquals(5L, found.get(0).getId().longValue());
 		assertEquals(2, found.size());
 	}
 
@@ -77,22 +91,36 @@ class CourseBookingSystemApplicationTests {
 	}
 
 	@Test
-	public void canFindCustomerByTownAndCourseName(){
-		List<Customer> found = customerRepository.findByTownAndBookingsCourseName("Highlands", "Data Analysis");
+	public void canFindCustomerByTownAndCourseName__CorrectCase(){
+		List<Customer> found = customerRepository.findByTownIgnoreCaseAndBookingsCourseNameIgnoreCase("Highlands", "Data Analysis");
 		assertEquals(3L, found.get(0).getId().longValue());
 		assertEquals(1, found.size());
 	}
 
 	@Test
-	public void canFindCustomerByTownAndOverACertainAgeAndByCourseName__WithCustomer(){
-		List<Customer> found = customerRepository.findAllByTownAndAgeGreaterThanAndBookingsCourseName("Edinburgh", 34,  "Python for Data Analysis");
+	public void canFindCustomerByTownAndCourseName__LowerCase(){
+		List<Customer> found = customerRepository.findByTownIgnoreCaseAndBookingsCourseNameIgnoreCase("highlands", "data analysis");
+		assertEquals(3L, found.get(0).getId().longValue());
+		assertEquals(1, found.size());
+	}
+
+	@Test
+	public void canFindCustomerByTownAndOverACertainAgeAndByCourseName__WithCustomerCorrectCase(){
+		List<Customer> found = customerRepository.findAllByTownIgnoreCaseAndAgeGreaterThanAndBookingsCourseNameIgnoreCase("Edinburgh", 34,  "Python for Data Analysis");
+		assertEquals(2L, found.get(0).getId().longValue());
+		assertEquals(1, found.size());
+	}
+
+	@Test
+	public void canFindCustomerByTownAndOverACertainAgeAndByCourseName__WithCustomerLowerCase(){
+		List<Customer> found = customerRepository.findAllByTownIgnoreCaseAndAgeGreaterThanAndBookingsCourseNameIgnoreCase("edinburgh", 34,  "python for data analysis");
 		assertEquals(2L, found.get(0).getId().longValue());
 		assertEquals(1, found.size());
 	}
 
 	@Test
 	public void canFindCustomerByTownAndOverACertainAgeAndByCourseName__WithOutCustomer(){
-		List<Customer> found = customerRepository.findAllByTownAndAgeGreaterThanAndBookingsCourseName("Edinburgh", 36,  "Python for Data Analysis");
+		List<Customer> found = customerRepository.findAllByTownIgnoreCaseAndAgeGreaterThanAndBookingsCourseNameIgnoreCase("Edinburgh", 36,  "Python for Data Analysis");
 		assertEquals(0, found.size());
 	}
 
