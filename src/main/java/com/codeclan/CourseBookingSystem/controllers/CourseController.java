@@ -15,7 +15,8 @@ public class CourseController {
     public ResponseEntity getCourses(
             @RequestParam(name = "rating", required = false) Integer rating,
             @RequestParam(name = "customerName", required = false) String customerName,
-            @RequestParam(name = "name", required = false) String name
+            @RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "town", required = false) String town
     ){
         if(rating != null){
             return new ResponseEntity(courseRepository.findByRating(rating), HttpStatus.OK);
@@ -25,6 +26,9 @@ public class CourseController {
         }
         if(name != null){
             return new ResponseEntity(courseRepository.findByNameIgnoreCase(name), HttpStatus.OK);
+        }
+        if(town != null){
+            return new ResponseEntity(courseRepository.findByTownIgnoreCase(town), HttpStatus.OK);
         }
         return new ResponseEntity(courseRepository.findAll(), HttpStatus.OK);
     }
